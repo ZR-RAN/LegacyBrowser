@@ -1767,7 +1767,6 @@ public class BrowserProvider2 extends SQLiteContentProvider {
                     updatedLegacy = values.containsKey(Images.FAVICON);
                 }
                 if (pruneImages() > 0 || updatedLegacy) {
-                    postNotifyUri(LEGACY_AUTHORITY_URI);
                 }
                 // Even though we may be calling notifyUri on Bookmarks, don't
                 // sync to network as images aren't synced. Otherwise this
@@ -2122,11 +2121,6 @@ public class BrowserProvider2 extends SQLiteContentProvider {
     }
 
     boolean shouldNotifyLegacy(Uri uri) {
-        if (uri.getPathSegments().contains("history")
-                || uri.getPathSegments().contains("bookmarks")
-                || uri.getPathSegments().contains("searches")) {
-            return true;
-        }
         return false;
     }
 
